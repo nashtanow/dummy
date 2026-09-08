@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>NastaNow</title>
+  
+  <!-- Basic Meta & SEO for QR Preview -->
+  <meta name="description" content="NastaNow - Fast, fresh breakfast & food delivery.">
+  <meta name="theme-color" content="#FF5722">
+  <meta property="og:title" content="NastaNow">
+  <meta property="og:description" content="NastaNow - Fast, fresh breakfast & food delivery.">
+  <meta property="og:type" content="website">
+
+  <style>
+    /* Reset & Zero-Dependency System Font Stack */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --primary: #FF5722;
+      --primary-gradient: linear-gradient(135deg, #FF6F00 0%, #FF3D00 100%);
+      --bg: #FAFAFA;
+      --card-bg: #FFFFFF;
+      --text-main: #1A1A1A;
+      --text-muted: #757575;
+      --ring-color: rgba(255, 87, 34, 0.15);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #121212;
+        --card-bg: #1E1E1E;
+        --text-main: #F5F5F5;
+        --text-muted: #9E9E9E;
+        --ring-color: rgba(255, 87, 34, 0.25);
+      }
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 380px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Brand Logo / Icon Card */
+    .logo-wrapper {
+      position: relative;
+      width: 92px;
+      height: 92px;
+      border-radius: 26px;
+      background: var(--primary-gradient);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 12px 32px rgba(255, 87, 34, 0.35);
+      margin-bottom: 24px;
+      animation: pulse-glow 2.4s ease-in-out infinite;
+    }
+
+    .logo-icon {
+      width: 48px;
+      height: 48px;
+      fill: #FFFFFF;
+    }
+
+    /* Brand Name */
+    .brand-name {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+      color: var(--text-main);
+    }
+
+    .brand-name .accent {
+      color: var(--primary);
+    }
+
+    /* Status & Loading Spinner */
+    .status-text {
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .spinner {
+      width: 20px;
+      height: 20px;
+      border: 2.5px solid var(--ring-color);
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    /* Fallback Direct Action Button (if redirect takes longer or for accessibility) */
+    .manual-link {
+      display: none;
+      margin-top: 16px;
+      padding: 10px 20px;
+      background-color: var(--primary);
+      color: #FFFFFF;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 999px;
+      box-shadow: 0 4px 14px rgba(255, 87, 34, 0.3);
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+
+    .manual-link:active {
+      transform: scale(0.97);
+    }
+
+    /* Subtle footer */
+    .footer {
+      position: absolute;
+      bottom: 24px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      letter-spacing: 0.2px;
+      opacity: 0.8;
+    }
+
+    /* Keyframe Animations */
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 12px 32px rgba(255, 87, 34, 0.35);
+      }
+      50% {
+        transform: scale(1.03);
+        box-shadow: 0 16px 40px rgba(255, 87, 34, 0.5);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <main class="container" role="main">
+    <!-- Brand Icon -->
+    <div class="logo-wrapper" aria-hidden="true">
+      <svg class="logo-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M11 9H4v2h5l-2 7h2l3-7V9zm6.5-6C16.12 3 15 4.12 15 5.5V11h2V5.5c0-.28.22-.5.5-.5s.5.22.5.5V11h2V5.5C20 4.12 18.88 3 17.5 3zM15 13v6c0 1.1.9 2 2 2h1c1.1 0 2-.9 2-2v-6h-5z"/>
+      </svg>
+    </div>
+
+    <!-- Brand Heading -->
+    <h1 class="brand-name">Nasta<span class="accent">Now</span></h1>
+
+    <!-- Loading Indicator -->
+    <div class="status-text" id="status-text">
+      <span class="spinner" aria-hidden="true"></span>
+      <span id="status-label">Loading...</span>
+    </div>
+
+    <!-- Manual fallback link (shown if URL is configured or if user's browser delays redirect) -->
+    <a id="manual-btn" class="manual-link" href="#" rel="noopener">Continue to destination &rarr;</a>
+  </main>
+
+  <footer class="footer">
+    &copy; NastaNow
+  </footer>
+
+  <script>
+    /* =========================================================================
+     * 🔗 CONFIGURATION: SET YOUR REDIRECT DESTINATION URL HERE
+     * =========================================================================
+     * INSTRUCTIONS:
+     * 1. Paste your destination URL inside the quotes below.
+     * 2. When empty (""), redirect is DISABLED and the branded placeholder is shown.
+     * 3. When you paste your URL (YouTube Short, Play Store, etc.), any user
+     *    scanning the QR code will instantly be redirected.
+     *
+     * EXAMPLES:
+     *   YouTube Short:     "https://youtube.com/shorts/YOUR_VIDEO_ID"
+     *   Google Play Store: "https://play.google.com/store/apps/details?id=com.nastanow.app"
+     *   App Store / Web:   "https://nastanow.com"
+     * ========================================================================= */
+    const DESTINATION_URL = "https://youtube.com/shorts/ZXYYmVQwUjs?si=L4-lGphK7LPpUv6p";
+
+    /* =========================================================================
+     * REDIRECT LOGIC
+     * ========================================================================= */
+    (function () {
+      const trimmedUrl = (typeof DESTINATION_URL === "string") ? DESTINATION_URL.trim() : "";
+
+      if (trimmedUrl.length > 0) {
+        // Destination is set -> perform immediate redirect
+        const statusLabel = document.getElementById("status-label");
+        const manualBtn = document.getElementById("manual-btn");
+
+        if (statusLabel) {
+          statusLabel.textContent = "Redirecting...";
+        }
+
+        if (manualBtn) {
+          manualBtn.href = trimmedUrl;
+          // Show fallback button after 1.5s in case device or app browser pauses JS redirects
+          setTimeout(function () {
+            manualBtn.style.display = "inline-block";
+          }, 1500);
+        }
+
+        // Use location.replace so the intermediate QR landing page doesn't trap the user's back button
+        try {
+          window.location.replace(trimmedUrl);
+        } catch (e) {
+          window.location.href = trimmedUrl;
+        }
+      } else {
+        // Destination not configured yet -> safe placeholder mode
+        console.info("[NastaNow QR] Placeholder mode active. Set DESTINATION_URL in index.html when ready.");
+      }
+    })();
+  </script>
+</body>
+</html>
